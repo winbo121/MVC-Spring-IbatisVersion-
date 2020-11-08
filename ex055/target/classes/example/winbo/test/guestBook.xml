@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC  "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+                                "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+                                
+                                
+<sqlMap namespace="GuestBook">
+
+<resultMap class="GuestBookVO" id="GuestBookVO">
+<result property="name" column="name"/>
+<result property="password" column="password"/>
+</resultMap>
+
+<resultMap class="java.lang.Integer" id="java.lang.Integer">
+<result property="userAllCount" column="userAllCount"/>
+</resultMap>
+
+<select id="userList" resultMap="GuestBookVO">
+<![CDATA[select * from (select a.* ,ROWNUM as num from userinfo a) where num > #offset# and num <= #limits# ]]>
+</select>
+
+<insert id="userInsert" >
+insert into userinfo (name,password)values(#name#,#password#)
+</insert>
+
+<select id="userRead" resultMap="GuestBookVO">
+select * from userinfo where name=#name#
+</select>
+
+<delete id="userDelete" >
+delete from userinfo where name=#name#
+</delete>
+
+<select id="userAllCount" resultMap="java.lang.Integer">
+select count(*) as userAllCount from userinfo
+</select>
+
+</sqlMap>

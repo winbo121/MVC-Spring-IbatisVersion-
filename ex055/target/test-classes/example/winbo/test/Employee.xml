@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD SQL Map Config 2.0 //EN' 
+							  'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+							  
+<sqlMap namespace="EmployeeSeting">
+<typeAlias alias="emp" type="gta.winbo.ex1.Employee"/>
+
+<resultMap class="emp" id="empRes">
+
+<result property="empno" column="empno"/>
+<result property="ename" column="ename"/>
+<result property="job" column="job"/>
+<result property="sal" column="sal"/>
+
+</resultMap>
+<select id="searchAll" parameterClass="String" resultMap="empRes">
+SELECT * FROM emp
+</select>
+
+
+<select id="searchJob" parameterClass="String" resultMap="empRes">
+select * FROM emp WHERE job=#job#
+</select>
+
+
+<insert id="insertHuman">
+insert INTO emp (empno, ename,job,sal) VALUES (#empno#,#ename#,#job#,#sal#)
+</insert>
+
+
+</sqlMap>							  

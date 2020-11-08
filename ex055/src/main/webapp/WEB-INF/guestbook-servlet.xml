@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="guestbookDAO" class="example.winbo.test.GuestBookDAOimpl">
+<property name="sqlMapClient" ref="sqlMapClient" />
+</bean>
+   
+<bean id="guestbookService" class="example.winbo.test.GuestBookServiceimpl">
+<property name="guestbookDAO" ref="guestbookDAO" />
+</bean>
+
+<bean id="guestbookVO" class="example.winbo.test.GuestBookVO" />
+<bean id="pageMaker" class="example.winbo.test.PageMaker" />
+
+<bean name="guestbookController" class="example.winbo.test.GuestBookController">
+<property name="guestbookService" ref="guestbookService" />
+<property name="guestbookVO" ref="guestbookVO"/>
+<property name="pageMaker" ref="pageMaker" />
+</bean>
+
+<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+<property name="mappings">
+<props>
+<prop key="/list.guest">guestbookController</prop>
+<prop key="/insertPro.guest">guestbookController</prop>
+<prop key="/insertForm.guest">guestbookController</prop>
+<prop key="/readForm.guest">guestbookController</prop>
+<prop key="/deletePro.guest">guestbookController</prop>
+</props>
+</property>
+
+</bean>
+
+<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+</beans>	
