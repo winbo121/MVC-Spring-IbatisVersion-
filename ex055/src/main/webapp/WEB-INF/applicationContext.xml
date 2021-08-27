@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-<!--	<property name="driverClassName">
+	<property name="driverClassName">
 	<value>oracle.jdbc.driver.OracleDriver</value>
 	</property>
 	<property name="url">
@@ -17,14 +17,8 @@
 	</property>
 	<property name="password">
 	<value>123456</value>
-	</property> -->
-		
-	     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-     <property name="url" 
-           value="jdbc:mysql://127.0.0.1:3306/test?useSSL=false&amp;serverTimezone=UTC"> 
-       </property> 
-        <property name="username" value="root"></property> 
-        <property name="password" value="123456"></property>
+	</property> 
+	
 	</bean>
 	
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
